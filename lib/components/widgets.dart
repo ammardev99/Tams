@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tams/Screens/service_details.dart';
 import 'package:tams/components/assets.dart';
-
+import 'package:tams/models/service.dart';
 
 myBoxShadow() {
   return const BoxShadow(
@@ -75,7 +77,8 @@ Widget coursePkg(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     heading(title, secondaryColor),
-                    const Text("Write an amazing description in this dedicated card section."),
+                    const Text(
+                        "Write an amazing description in this dedicated card section."),
                     const SizedBox(height: 8),
                     // SizedBox(child: pkgInfoIcons(5, 3.5, 25, 10)),
                   ],
@@ -96,77 +99,80 @@ Widget coursePkg(
     ),
   );
 }
-Widget serviceDetails(
-  String title,
-  String img,
-  BuildContext context,
-  openPage,
-) {
-  return Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 10),
-    child: InkWell(
-      hoverColor: Colors.white,
-      splashColor: secondaryColor03,
-      borderRadius: BorderRadius.circular(8),
-      highlightColor: Colors.white,
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => openPage));
-      },
-      // main container
-      child: Stack(children: [
-        Container(
-          width: MediaQuery.of(context).size.width >= 360
-              ? 370
-              : MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.all(8),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            border: Border.all(width: 1, color: secondaryColor03),
-            boxShadow: [myBoxShadow()],
-          ),
-          child: Row(
-            children: [
-              // Thumbnail
-              Container(
-                width: 80,
-                height: 80,
-                decoration: BoxDecoration(
-                  border: Border.all(width: 1, color: secondaryColor03),
-                  borderRadius: BorderRadius.circular(8),
-                  image: DecorationImage(
-                    image: AssetImage(img),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              // Thumbnail end
-              const SizedBox(width: 15),
 
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+Widget showService(Service object, [List<Object>? list]) {
+  return InkWell(
+    hoverColor: Colors.white,
+    splashColor: secondaryColor03,
+    borderRadius: BorderRadius.circular(8),
+    highlightColor: Colors.white,
+    onTap: () {
+      debugPrint('Open Service Info');
+      Get.to(const ServiceDetails(), arguments: list);
+    },
+    child: Stack(children: [
+      Container(
+        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(width: 1, color: secondaryColor03),
+          boxShadow: [myBoxShadow()],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Thumbnail
+            SizedBox(
+                width: double.infinity,
+                height: 160,
+                child: Image.memory(
+                  object.image,
+                  fit: BoxFit.cover,
+                )),
+            // Thumbnail end
+            const SizedBox(width: 15),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                sizeBox(20, 10),
+                heading(object.title, secondaryColor),
+                sizeBox(20, 5),
+                Row(
                   children: [
-                    heading(title, secondaryColor),
-                    const Text("Write an amazing description in this dedicated card section."),
-                    const SizedBox(height: 8),
-                    // SizedBox(child: pkgInfoIcons(5, 3.5, 25, 10)),
+                    icontInfo(
+                        Icons.person,
+                        object.category == '1'
+                            ? 'All'
+                            : object.category == '2'
+                                ? 'Female'
+                                : 'Male'),
+                    sizeBox(15, 15),
+                    icontInfo(Icons.nights_stay_outlined, object.duration),
+                    sizeBox(15, 15),
+                    icontInfo(Icons.date_range_outlined,
+                    object.startdate == 'undefined' ?
+                    'Not Available' : object.startdate),
+                    const Spacer(),
+                    sizeBox(15, 15),
+                    icontInfo(Icons.receipt_long_outlined,
+                        object.price.toString(), Colors.red[300]),
                   ],
                 ),
-              ),
-            ],
-          ),
+              ],
+            ),
+          ],
         ),
-        Positioned(
-            right: 0,
-            child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.favorite_border_rounded,
-                  color: Colors.grey,
-                )))
-      ]),
-    ),
+      ),
+      // Positioned(
+      //     right: 0,
+      //     child: IconButton(
+      //         onPressed: () {},
+      //         icon: const Icon(
+      //           Icons.favorite_border_rounded,
+      //           color: Colors.grey,
+      //         ))
+      //         )
+    ]),
   );
 }
 

@@ -43,6 +43,7 @@ dependencies:
   json_serializable: ^6.8.0
   http: ^1.2.1
   base64_image_picker: ^0.0.1
+  get: ^4.6.6
 
 dev_dependencies:
   flutter_test:

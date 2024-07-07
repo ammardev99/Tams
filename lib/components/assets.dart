@@ -51,6 +51,40 @@ Widget captionText(
   );
 }
 
+
+Widget textInfo(
+  String txt,
+  [Color? color]
+) {
+  return Text(
+    txt,
+    style: TextStyle(
+      fontSize: 11,
+      color: color??Colors.grey),
+  );
+}
+
+
+Widget icontInfo(IconData icon,
+  String txt,
+  [Color? color]
+) {
+  return Row(
+    children: [
+      Icon(icon, size: 20, color:color??Colors.grey,),
+      sizeBox(5, 5),
+      Text(
+        txt,
+        style: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color:color??Colors.grey),
+      ),
+    ],
+  );
+}
+
+
 TextStyle infoHeading() {
   return const TextStyle(
     fontWeight: FontWeight.w700,
