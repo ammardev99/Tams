@@ -6,7 +6,7 @@ Color secondaryColor03 = secondaryColor.withOpacity(0.3);
 Color whiteColor = const Color(0xFFFfffff);
 
 primaryColorBtn() {
-  return MaterialStateProperty.all<Color>(
+  return WidgetStateProperty.all<Color>(
     const Color.fromRGBO(229, 49, 233, 0.25),
   );
 }

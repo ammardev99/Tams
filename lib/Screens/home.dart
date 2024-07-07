@@ -1,7 +1,7 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:tams/tams_services.dart';
 
-import 'explore.dart';
 import 'learning/learning.dart';
 import 'notes.dart';
 import 'setting/profile.dart';
@@ -16,11 +16,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int currentIndex = 0;
 
-  final screens = const [
-    Explore(),
-    Learning(),
-    Cart(),
-    Profile(),
+  final screens =  [
+    const ServiceListScreen(),
+    const Learning(),
+    const Cart(),
+    const Profile(),
     // Learning(),
   ];
 

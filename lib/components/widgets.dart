@@ -96,6 +96,79 @@ Widget coursePkg(
     ),
   );
 }
+Widget serviceDetails(
+  String title,
+  String img,
+  BuildContext context,
+  openPage,
+) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 10),
+    child: InkWell(
+      hoverColor: Colors.white,
+      splashColor: secondaryColor03,
+      borderRadius: BorderRadius.circular(8),
+      highlightColor: Colors.white,
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => openPage));
+      },
+      // main container
+      child: Stack(children: [
+        Container(
+          width: MediaQuery.of(context).size.width >= 360
+              ? 370
+              : MediaQuery.of(context).size.width,
+          padding: const EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(width: 1, color: secondaryColor03),
+            boxShadow: [myBoxShadow()],
+          ),
+          child: Row(
+            children: [
+              // Thumbnail
+              Container(
+                width: 80,
+                height: 80,
+                decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: secondaryColor03),
+                  borderRadius: BorderRadius.circular(8),
+                  image: DecorationImage(
+                    image: AssetImage(img),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              // Thumbnail end
+              const SizedBox(width: 15),
+
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    heading(title, secondaryColor),
+                    const Text("Write an amazing description in this dedicated card section."),
+                    const SizedBox(height: 8),
+                    // SizedBox(child: pkgInfoIcons(5, 3.5, 25, 10)),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        Positioned(
+            right: 0,
+            child: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.favorite_border_rounded,
+                  color: Colors.grey,
+                )))
+      ]),
+    ),
+  );
+}
 
 Widget pkgInfoIcons(int m, double r, int s, int f) {
   return Row(
