@@ -147,11 +147,10 @@ Widget showService(Service object, [List<Object>? list]) {
                                 ? 'Female'
                                 : 'Male'),
                     sizeBox(15, 15),
-                    icontInfo(Icons.nights_stay_outlined, object.duration),
+                    icontInfo(Icons.sunny_snowing, object.duration),
                     sizeBox(15, 15),
-                    icontInfo(Icons.date_range_outlined,
-                    object.startdate == 'undefined' ?
-                    'Not Available' : object.startdate),
+                    // icontInfo(Icons.date_range_outlined,
+                    // object.startdate),
                     const Spacer(),
                     sizeBox(15, 15),
                     icontInfo(Icons.receipt_long_outlined,

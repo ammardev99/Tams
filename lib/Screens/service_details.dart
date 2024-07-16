@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:tams/components/assets.dart';
 import 'package:tams/models/favorite_controller.dart';
 import 'package:tams/models/service.dart';
+import 'package:tams/modules/order/view.dart';
 
 class ServiceDetails extends StatefulWidget {
   const ServiceDetails({super.key});
@@ -13,7 +14,6 @@ class ServiceDetails extends StatefulWidget {
 
 class _ServiceDetailsState extends State<ServiceDetails> {
   late Service service;
-
   @override
   void initState() {
     super.initState();
@@ -21,7 +21,6 @@ class _ServiceDetailsState extends State<ServiceDetails> {
     final arguments = Get.arguments as List;
     final List<Service> services = arguments[0];
     final int index = arguments[1];
-
     // Get the service at the provided index
     service = services[index];
   }
@@ -57,7 +56,7 @@ class _ServiceDetailsState extends State<ServiceDetails> {
               },
               icon: Icon(
                 isFavorited ? Icons.favorite : Icons.favorite_border,
-                color: Colors.white,
+                color: Colors.red,
               ),
             ),
           ],
@@ -77,12 +76,10 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                     fit: BoxFit.cover,
                   ),
                 ),
+                const SizedBox(height: 10),
+                const SizedBox(height: 10),
                 heading1(service.title, Colors.black),
-                Text(
-                  service.description,
-                  textAlign: TextAlign.justify,
-                ),
-                sizeBox(10, 30),
+                sizeBox(10, 20),
                 icontInfo(
                   Icons.person,
                   service.category == '1'
@@ -107,14 +104,19 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                   'Price: ${service.price.toString()} /Per Head',
                   Colors.red[300],
                 ),
-                sizeBox(10, 30),
+                sizeBox(10, 20),
+                Text(
+                  service.description,
+                  textAlign: TextAlign.justify,
+                ),
+                sizeBox(10, 20),
                 Center(
                   child: InkWell(
                     onTap: () {
                       showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
-                          title: heading("Order Now", Colors.black),
+                          title: heading(service.title, Colors.black),
                           content: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -138,7 +140,13 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                                         WidgetStateProperty.all(secondaryColor),
                                     elevation: WidgetStateProperty.all(10),
                                   ),
-                                  onPressed: () => Navigator.pop(context),
+                                  onPressed: () {
+                                    print(service.id);
+                                    Get.to(
+                                      OrderPage(),
+                                      arguments: service.id,
+                                    );
+                                  },
                                   child: heading(
                                     'Confirm',
                                     Colors.white,
