@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tams/components/assets.dart';
 import 'package:tams/models/favorite_controller.dart';
+import 'package:tams/models/order.dart';
 import 'package:tams/models/service.dart';
 import 'package:tams/modules/order/view.dart';
 
@@ -27,38 +28,37 @@ class _ServiceDetailsState extends State<ServiceDetails> {
 
   @override
   Widget build(BuildContext context) {
-    bool isFavorited = FavoriteService.isFavorite(service);
-
+    RxBool isFavorited = FavoriteService.isFavorite(service).obs;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leading: const BackButton(
-            color: Colors.white,
+          leading: BackButton(
+            color: whiteColor,
           ),
-          flexibleSpace:
-              Container(decoration: BoxDecoration(gradient: myGradient())),
+          backgroundColor: secondaryColor,
           actions: [
-            IconButton(
-              onPressed: () {
-                FavoriteService.toggleFavorite(
-                    service); // Toggle favorite state
-                isFavorited
-                    ? Get.snackbar(
-                        'Favorite Removed',
-                        '${service.title} has been removed from your favorites',
-                        snackPosition: SnackPosition.BOTTOM,
-                      )
-                    : Get.snackbar(
-                        'Favorite Added',
-                        '${service.title} has been added to your favorites',
-                        snackPosition: SnackPosition.BOTTOM,
-                      );
-              },
-              icon: Icon(
-                isFavorited ? Icons.favorite : Icons.favorite_border,
+            IconButton(onPressed: () {
+              FavoriteService.toggleFavorite(service); // Toggle favorite state
+              isFavorited.value
+                  ? Get.snackbar(
+                      'Favorite Removed',
+                      '${service.title} has been removed from your favorites',
+                      snackPosition: SnackPosition.TOP,
+                      backgroundColor: secondaryColor03,
+                    )
+                  : Get.snackbar(
+                      'Favorite Added',
+                      '${service.title} has been added to your favorites',
+                      snackPosition: SnackPosition.TOP,
+                      backgroundColor: secondaryColor03,
+                    );
+              isFavorited.value = !isFavorited.value;
+            }, icon: Obx(() {
+              return Icon(
+                isFavorited.value ? Icons.favorite : Icons.favorite_border,
                 color: Colors.red,
-              ),
-            ),
+              );
+            })),
           ],
         ),
         body: SingleChildScrollView(
@@ -141,7 +141,8 @@ class _ServiceDetailsState extends State<ServiceDetails> {
                                     elevation: WidgetStateProperty.all(10),
                                   ),
                                   onPressed: () {
-                                    print(service.id);
+                                    debugPrint('Service selected');
+                                    selectedService.copy(service);
                                     Get.to(
                                       OrderPage(),
                                       arguments: service.id,

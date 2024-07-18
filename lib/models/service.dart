@@ -2,14 +2,14 @@
 import 'dart:typed_data';
 
 class Service {
-  final String id;
-  final String title;
-  final String description;
-  final String startdate;
-  final String category;
-  final String duration;
-  final int price;
-  final Uint8List image;
+  String id;
+  String title;
+  String description;
+  String startdate;
+  String category;
+  String duration;
+  int price;
+  Uint8List image;
 
   Service({
     required this.id,
@@ -21,6 +21,17 @@ class Service {
     required this.price,
     required this.image,
   });
+
+  void copy(Service service) {
+    id = service.id;
+    title = service.title;
+    description = service.description;
+    startdate = service.startdate;
+    category = service.category;
+    duration = service.duration;
+    price = service.price;
+    image = service.image;
+  }
 
   factory Service.fromJson(Map<String, dynamic> json) {
     return Service(
@@ -35,5 +46,3 @@ class Service {
     );
   }
 }
-
-

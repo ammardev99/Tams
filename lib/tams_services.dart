@@ -6,8 +6,8 @@ import 'package:tams/models/service.dart';
 
 class ServiceListScreen extends StatefulWidget {
   const ServiceListScreen({super.key});
-
   @override
+  // ignore: library_private_types_in_public_api
   _ServiceListScreenState createState() => _ServiceListScreenState();
 }
 
@@ -17,6 +17,7 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
   @override
   void initState() {
     super.initState();
+    
     _fetchServices(); // Fetch services initially
   }
 
@@ -28,13 +29,14 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
         _services = fetchedServices; // Update the list with fetched services
       });
     } catch (e) {
+      // ignore: avoid_print
       print('Error fetching services: $e');
       // Handle error as needed
     }
   }
 
   Future<void> _refreshServices() async {
-    await _fetchServices(); // Refresh services on pull down or button press
+    await _fetchServices();
   }
 
   @override
@@ -52,13 +54,15 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
             Container(decoration: BoxDecoration(gradient: myGradient())),
         actions: [
           IconButton(
+            onPressed: () {
+              _refreshServices;
+            },
             icon: const Icon(Icons.refresh),
-            onPressed: _refreshServices, // Fetch services on button press
-          ),
+          )
         ],
       ),
       body: RefreshIndicator(
-        onRefresh: _refreshServices, // Refresh services on pull down
+        onRefresh: _refreshServices,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
