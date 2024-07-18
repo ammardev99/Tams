@@ -33,52 +33,6 @@ class OrderPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-// Total Members
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    heading("Total Members", primaryColor),
-                    Row(
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              if (state.totalMembers.value > 0) {
-                                state.totalMembers.value--;
-                              }
-                              logic.updateTotal();
-                              if (state.totalMembers <= 0) {
-                                logic.addMembersSpace.value = true;
-                              }
-                            },
-                            icon: const Icon(Icons.remove_circle_outline)),
-                        Obx(() {
-                          return heading("${state.totalMembers}", primaryColor);
-                        }),
-                        IconButton(
-                            onPressed: () {
-                              state.totalMembers.value++;
-                              logic.updateTotal();
-                              if (state.totalMembers > 0) {
-                                logic.addMembersSpace.value = false;
-                              }
-                            },
-                            icon: const Icon(Icons.add_circle_outline)),
-                      ],
-                    )
-                  ],
-                ),
-// zero error
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Obx(() {
-                      return logic.addMembersSpace.value
-                          ? textInfo('Please add members', Colors.red)
-                          : Container();
-                    }),
-                  ],
-                ),
-
 // Service Details option
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -161,20 +115,89 @@ class OrderPage extends StatelessWidget {
                         )
                       : sizeBox(0, 0);
                 }),
-                sizeBox(10, 10),
-// Total Price
+                sizeBox(10, 15),
+// status /
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    heading("Status", primaryColor),
+                    Obx(() {
+                      return Switch(
+                          thumbColor: WidgetStatePropertyAll(secondaryColor),
+                          activeColor: secondaryColor,
+                          trackOutlineColor:
+                              WidgetStatePropertyAll(secondaryColor03),
+                          value: state.orderStatus.value,
+                          onChanged: (value) {
+                            state.orderStatus.value = value;
+                          });
+                    }),
+                  ],
+                ),
+
+                sizeBox(10, 15),
+//Members
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    heading("Total Members", primaryColor),
                     heading("Total Price", primaryColor),
+                  ],
+                ),
+// Total 
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              if (state.totalMembers.value > 0) {
+                                state.totalMembers.value--;
+                              }
+                              logic.updateTotal();
+                              if (state.totalMembers <= 0) {
+                                logic.addMembersSpace.value = true;
+                              }
+                            },
+                            icon: const Icon(Icons.remove_circle_outline)),
+                        Obx(() {
+                          return heading("${state.totalMembers}", primaryColor);
+                        }),
+                        IconButton(
+                            onPressed: () {
+                              state.totalMembers.value++;
+                              logic.updateTotal();
+                              if (state.totalMembers > 0) {
+                                logic.addMembersSpace.value = false;
+                              }
+                            },
+                            icon: const Icon(Icons.add_circle_outline)),
+                      ],
+                    ),
                     Obx(() {
                       return heading("Rs. ${state.totalPrice}", primaryColor);
                     })
                   ],
                 ),
+// zero error
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Obx(() {
+                      return logic.addMembersSpace.value
+                          ? textInfo('Please add members', Colors.red)
+                          : Container();
+                    }),
+                  ],
+                ),
 
+
+                sizeBox(15, 15),
+                const Divider(),
+                sizeBox(15, 15),
 // input fields
-                sizeBox(10, 30),
+
                 // name
                 InputFormFieldApp(
                     label: "Customer Name",
@@ -185,8 +208,8 @@ class OrderPage extends StatelessWidget {
                 sizeBox(15, 15),
                 // numbers
                 InputFormFieldApp(
-                    label: "Number",
-                    hint: 'hint',
+                    label: "Phone",
+                    hint: '03xxxxxxxxx',
                     controller: state.customerPhone,
                     inputType: TextInputType.phone,
                     validator: validPhoneNumber),
@@ -202,7 +225,7 @@ class OrderPage extends StatelessWidget {
                 // emergency
                 InputFormFieldApp(
                     label: "Emergency",
-                    hint: 'hint',
+                    hint: '03xxxxxxxxx',
                     controller: state.customerEmergencyPhone,
                     inputType: TextInputType.phone,
                     validator: validPhoneNumber),
@@ -210,7 +233,7 @@ class OrderPage extends StatelessWidget {
                 // Address Email
                 InputFormFieldApp(
                     label: "Email",
-                    hint: 'hint',
+                    hint: 'user@gmail.com',
                     controller: state.customerEmail,
                     inputType: TextInputType.emailAddress,
                     validator: validEmail),
@@ -218,12 +241,13 @@ class OrderPage extends StatelessWidget {
                 // Refrerral code
                 InputFormFieldApp(
                     label: "Referral Code",
-                    hint: 'Agent Code',
+                    hint: 'xxxx',
                     controller: state.customerReferralCode,
                     inputType: TextInputType.number,
                     validator: validReferralCode),
                 sizeBox(15, 15),
-                // zero error
+
+// zero error
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -238,24 +262,48 @@ class OrderPage extends StatelessWidget {
                 sizeBox(15, 10),
 
                 Center(
-                  child: TextButton(
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all(primaryColor),
-                        padding: const WidgetStatePropertyAll(
-                            EdgeInsetsDirectional.symmetric(
-                                vertical: 20, horizontal: 100)),
-                      ),
-                      onPressed: () {
-                        if (state.totalMembers.value > 0) {
-                          logic.addMembersSpace.value = false;
-                          logic.placeOrder();
-                        } else {
-                          logic.addMembersSpace.value = true;
-                        }
-                      },
-                      child: heading("Place Order", whiteColor)),
+                  child: Obx(() {
+                    return logic.isLoading.value
+                        ? const CircularProgressIndicator()
+                        : TextButton(
+                            style: ButtonStyle(
+                              backgroundColor:
+                                  WidgetStateProperty.all(primaryColor),
+                              padding: const WidgetStatePropertyAll(
+                                  EdgeInsetsDirectional.symmetric(
+                                      vertical: 20, horizontal: 100)),
+                            ),
+                            onPressed: () {
+                              if (state.totalMembers.value > 0) {
+                                logic.addMembersSpace.value = false;
+                                logic.placeOrder(context);
+                              } else {
+                                logic.addMembersSpace.value = true;
+                              }
+                            },
+                            child: heading("Place Order", whiteColor),
+                          );
+                  }),
                 ),
-                sizeBox(15, 40),
+                // Center(
+                //   child: TextButton(
+                //       style: ButtonStyle(
+                //         backgroundColor: WidgetStateProperty.all(primaryColor),
+                //         padding: const WidgetStatePropertyAll(
+                //             EdgeInsetsDirectional.symmetric(
+                //                 vertical: 20, horizontal: 100)),
+                //       ),
+                //       onPressed: () {
+                //         if (state.totalMembers.value > 0) {
+                //           logic.addMembersSpace.value = false;
+                //           logic.placeOrder();
+                //         } else {
+                //           logic.addMembersSpace.value = true;
+                //         }
+                //       },
+                //       child: heading("Place Order", whiteColor)),
+                // ),
+                // sizeBox(15, 40),
               ],
             ),
           ),

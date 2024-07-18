@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:tams/Screens/home.dart';
 import 'package:tams/models/order.dart';
 import 'package:tams/models/service.dart';
 import 'package:http/http.dart' as http;
@@ -12,6 +13,8 @@ class OrderLogic extends GetxController {
   late Service service;
   RxBool showDetails = false.obs;
   RxBool addMembersSpace = false.obs;
+  RxBool isLoading = false.obs;
+
   void changeView() {
     showDetails.value = !showDetails.value;
   }
@@ -21,8 +24,9 @@ class OrderLogic extends GetxController {
   }
 
   get formKey => _formKey;
-  void placeOrder() async {
+  void placeOrder(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
+      isLoading.value = true;
       debugPrint("Order Placed");
 
       // Extracting the values from the state
@@ -36,17 +40,17 @@ class OrderLogic extends GetxController {
 
       // Creating the order data
       Map<String, dynamic> orderData = {
-        // 'serviceId': tourId,
+        'serviceId': selectedService.id,
         'userName': userName,
         'userCNIC': userCNIC,
         'userPhoneNumber': userPhoneNumber,
         'userEmergencyContact': userEmergencyContact,
         'userEmail': userEmail,
         'userAddress': userAddress,
-        'totalAmount': 20000, // You need to get the actual total amount
-        'totalMembers': 1, // You need to get the actual number of members
+        'totalAmount': state.totalPrice.toInt(),
+        'totalMembers': state.totalMembers.toInt(),
         'referral': referral,
-        'confirmed': 'true'
+        'confirmed': state.orderStatus.value.toString()
       };
       // Making the POST request
       var url = Uri.parse('https://travelagency-rho.vercel.app/api/order');
@@ -57,12 +61,32 @@ class OrderLogic extends GetxController {
         },
         body: jsonEncode(orderData),
       );
-
+      isLoading.value = false;
       if (response.statusCode == 200) {
         debugPrint('Order placed successfully: ${response.body}');
+        // Show success popup
+        Get.defaultDialog(
+          title: "Success",
+          content: const Padding(
+            padding: EdgeInsets.symmetric(vertical: 20),
+          child: Text("Order placed successfully!"),
+          ),
+          onConfirm: () {
+            Get.offAll(const HomePage());
+          },
+          textConfirm: "Home",
+        );
       } else {
         debugPrint('Failed to place order: ${response.statusCode}');
+        // Show error message
+        Get.snackbar("Error", "Failed to place order. Please try again.");
       }
+
+      // if (response.statusCode == 200) {
+      //   debugPrint('Order placed successfully: ${response.body}');
+      // } else {
+      //   debugPrint('Failed to place order: ${response.statusCode}');
+      // }
     }
   }
 

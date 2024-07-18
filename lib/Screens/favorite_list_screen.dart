@@ -18,7 +18,8 @@ class FavoriteListScreen extends StatelessWidget {
           style: TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        flexibleSpace: Container(decoration: BoxDecoration(gradient: myGradient())),
+        flexibleSpace:
+            Container(decoration: BoxDecoration(gradient: myGradient())),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

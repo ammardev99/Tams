@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 class OrderState {
   RxInt totalMembers = 0.obs;
   RxInt totalPrice = 0.obs;
+  RxBool orderStatus = false.obs;
   TextEditingController toursName = TextEditingController();
   TextEditingController customerName = TextEditingController();
   TextEditingController customerPhone = TextEditingController();
