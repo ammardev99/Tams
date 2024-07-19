@@ -1,9 +1,20 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tams/auth/login.dart';
 import 'package:tams/components/assets.dart';
+import 'package:tams/firebase_options.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
+    statusBarColor: secondaryColor,
+    statusBarBrightness: Brightness.light,
+  ));
   runApp(const MyApp());
 }
 

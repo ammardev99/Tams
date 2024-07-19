@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "636207317567",
+    "project_id": "tams-fc4e6",
+    "storage_bucket": "tams-fc4e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:636207317567:android:7baf72312432792c986e8a",
+        "android_client_info": {
+          "package_name": "com.example.tams"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzZ_fmAEufAvV2Adw5GlIA36Iz-3-bo5w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
