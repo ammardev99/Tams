@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:tams/Screens/favorite_list_screen.dart';
 import 'package:tams/tams_services.dart';
 import 'notes.dart';
-import 'setting/profile.dart';
+import '../modules/profile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
