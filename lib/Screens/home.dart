@@ -43,7 +43,7 @@ class _HomePageState extends State<HomePage> {
             items: const [
               Icon(Icons.line_style_rounded),
               Icon(Icons.favorite),
-              Icon(Icons.shopping_cart),
+              Icon(Icons.image),
               Icon(Icons.person),
             ],
             onTap: (int index) {

@@ -53,13 +53,12 @@ class LoginPage extends StatelessWidget {
                   validator: validpassword6digit,
                 ),
                 sizeBox(30),
-
                 Obx(() {
                   return ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(secondaryColor),
-                      minimumSize: const WidgetStatePropertyAll(
-                          Size(double.infinity, 50)),
+                      backgroundColor: WidgetStateProperty.all(secondaryColor),
+                      minimumSize: WidgetStateProperty.all(
+                          const Size(double.infinity, 50)),
                     ),
                     onPressed: () async {
                       await logic.login();
@@ -90,7 +89,6 @@ class LoginPage extends StatelessWidget {
                     )
                   ],
                 ),
-
                 sizeBox(30)
               ],
             ),

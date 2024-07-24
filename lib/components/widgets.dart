@@ -109,6 +109,7 @@ Widget showService(Service object, [List<Object>? list]) {
     highlightColor: Colors.white,
     onTap: () {
       debugPrint('Open Service Info');
+
       Get.to(const ServiceDetails(), arguments: list);
     },
     child: Stack(children: [
@@ -418,3 +419,4 @@ Widget menuOption(Icon icon, String txt, BuildContext context, [page]) {
     ),
   );
 }
+

@@ -1,15 +1,28 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:tams/Screens/setting/edit_profile.dart';
-import 'package:tams/Screens/socail_media.dart';
+import 'package:get/get.dart';
 import 'package:tams/auth/login/view.dart';
 import 'package:tams/components/assets.dart';
-import 'package:tams/components/widgets.dart';
+import 'package:tams/widgets/buttons.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});
 
+  String? getCurrentUserEmail() {
+    User? user = FirebaseAuth.instance.currentUser;
+    return user?.email;
+  }
+
+  String extractUsername(String email) {
+    return email.split('@')[0];
+  }
+
   @override
   Widget build(BuildContext context) {
+    String? userEmail = getCurrentUserEmail();
+    String? username =
+        userEmail != null ? extractUsername(userEmail) : 'Company';
+
     return Scaffold(
         body: ListView(
       children: [
@@ -27,79 +40,41 @@ class Profile extends StatelessWidget {
                 child: ListTile(
                   leading: const CircleAvatar(
                     backgroundImage: AssetImage(
-                      "assets/images/profile.jpg",
+                      "assets/logo.png",
                     ),
                   ),
-                  title: const Text(
-                    "User Name",
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w500),
-                  ),
-                  subtitle: const Text(
-                    'usermail@gmail.com',
-                    style: TextStyle(
+                  title: heading('$username Agent', Colors.white),
+                  subtitle: Text(
+                    userEmail ?? 'useremail@gmail.com',
+                    style: const TextStyle(
                       color: Colors.white,
                       // color: primaryColor,
                     ),
                   ),
-                  trailing: const Icon(
-                    Icons.edit,
-                    color: Color(0xFFffffff),
-                  ),
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const EditProfile()));
-                  },
+                  // trailing: const Icon(
+                  //   Icons.edit,
+                  //   color: Color(0xFFffffff),
+                  // ),
+                  // onTap: () {
+                  //   Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => const EditProfile()));
+                  // },
                 ),
               ),
             )),
-        // menuOption(
-        //   const Icon(Icons.favorite_border_rounded),
-        //   'My Favorite',
-        //   context,
-        // ),
-        // menuOption(
-        //   const Icon(Icons.assignment_outlined),
-        //   'CV | Resume',
-        //   context,
-        // ),
-        menuOption(
-          const Icon(Icons.card_giftcard_rounded),
-          'Donate',
-          context,
-        ),
-        // menuOption(
-        //   const Icon(Icons.history),
-        //   'History',
-        //   context,
-        // ),
-        menuOption(
-          const Icon(
-            Icons.support_agent_rounded,
-          ),
-          'Help',
-          context,
-        ),
-        menuOption(
-          const Icon(Icons.info_outline_rounded),
-          'About us',
-          context,
-        ),
-        menuOption(
-            const Icon(
-              Icons.account_tree_outlined,
-            ),
-            'Community',
+        menuOptionLink(
             context,
-            const SocailMedia()),
-        // menuOption(
-        //   const Icon(Icons.bookmark_add_outlined),
-        //   'Add Course',
-        //   context,
-        //   const AddCourse()
-        // ),
+            Icons.queue_play_next_outlined,
+            'Cuztomize a tour',
+            'https://travelagency-rho.vercel.app/home/contact'),
+        menuOptionLink(context, Icons.open_in_browser_rounded, 'Visit website',
+            'https://travelagency-rho.vercel.app/'),
+        menuOptionLink(context, Icons.info_outline_rounded, 'About us',
+            'https://travelagency-rho.vercel.app/home/about'),
+        menuOptionLink(context, Icons.support_agent_rounded, 'Contact us',
+            'https://travelagency-rho.vercel.app/home/contact'),
         Container(
           decoration: BoxDecoration(
               border: Border(bottom: BorderSide(color: secondaryColor))),
@@ -107,15 +82,44 @@ class Profile extends StatelessWidget {
             hoverColor: secondaryColor03,
             splashColor: secondaryColor03,
             leading: const Icon(Icons.logout),
-            iconColor: Colors.grey,
-            title: subHeading("Logout", Colors.grey),
+            iconColor: Colors.red.shade400,
+            title: subHeading("Logout", Colors.red.shade400),
             trailing: Icon(
               Icons.chevron_right,
               color: secondaryColor03,
             ),
             onTap: () {
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => LoginPage()));
+              showDialog(
+                // ignore: use_build_context_synchronously
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: Text(
+                      'Log out!',
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          color: Colors.red.shade400),
+                    ),
+                    content: const Text('Do you want to log out?'),
+                    actions: [
+                      TextButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                WidgetStatePropertyAll(Colors.red.shade100)),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          Get.offAll(LoginPage());
+                        },
+                        child: const Text(
+                          'Confirm',
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, color: Colors.red),
+                        ),
+                      ),
+                    ],
+                  );
+                },
+              );
             },
           ),
         )
