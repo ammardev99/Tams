@@ -3,18 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:tams/auth/login.dart';
+import 'package:tams/auth/login/view.dart';
 import 'package:tams/components/assets.dart';
 import 'package:tams/firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+    debugPrint('Firebase initialized successfully');
+  } catch (e) {
+    debugPrint('Firebase initialization failed: $e');
+  }
+
   SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
     statusBarColor: secondaryColor,
     statusBarBrightness: Brightness.light,
   ));
+
   runApp(const MyApp());
 }
 
@@ -31,7 +40,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: secondaryColor),
         useMaterial3: true,
       ),
-      home: const Login(),
+      // home: const Login(),
+      home: LoginPage(),
     );
   }
 }

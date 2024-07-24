@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tams/components/assets.dart';
 import 'package:tams/components/widgets.dart';
+import 'package:tams/utili/formating.dart';
 
 class Cart extends StatelessWidget {
   const Cart({super.key});

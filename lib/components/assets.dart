@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tams/utili/formating.dart';
 
 Color primaryColor = const Color(0xFF053365);
 Color secondaryColor = const Color(0xFF249FFF);
@@ -131,12 +132,12 @@ InputDecoration inputStyle(IconData icon, String label, String hint) {
       ));
 }
 
-Widget sizeBox(double w, double h) {
-  return SizedBox(
-    height: h,
-    width: w,
-  );
-}
+// Widget sizeBox(double w, [double? h]) {
+//   return SizedBox(
+//     height: h??w,
+//     width: w,
+//   );
+// }
 
 myGradient() {
   return const LinearGradient(

@@ -81,14 +81,27 @@ String? validpassword6digit(String? value) {
   if ((value ?? "").isEmpty) {
     return 'Password is required';
   }
-  if (value!.length != 6) {
-    return 'Password must be exactly 6 characters long';
+  if (value!.length < 6) {
+    return 'Password must be grater then 6 characters';
   }
-  if (!RegExp(r'^[a-zA-Z0-9!@#$&*~]+$').hasMatch(value)) {
-    return 'Password must contain only letters, digits, or special characters (!@#\$&*~)';
-  }
+  // if (!RegExp(r'^[a-zA-Z0-9!@#$&*~]+$').hasMatch(value)) {
+  //   return 'Password must contain only letters, digits, or special characters (!@#\$&*~)';
+  // }
   return null;
 }
+
+// String? validpassword6digit(String? value) {
+//   if ((value ?? "").isEmpty) {
+//     return 'Password is required';
+//   }
+//   if (value!.length > 6) {
+//     return 'Password must be grater then 6 characters';
+//   }
+//   // if (!RegExp(r'^[a-zA-Z0-9!@#$&*~]+$').hasMatch(value)) {
+//   //   return 'Password must contain only letters, digits, or special characters (!@#\$&*~)';
+//   // }
+//   return null;
+// }
 
 // CNIC
 String? validCNIC(String? value) {

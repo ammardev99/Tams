@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tams/components/assets.dart';
+import 'package:tams/utili/formating.dart';
 
 class InputFormFieldApp extends StatelessWidget {
   final String label;
@@ -19,36 +20,26 @@ class InputFormFieldApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      controller: controller,
-      keyboardType: inputType,
-      decoration: InputDecoration(
-          contentPadding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
-          labelText: label,
-          labelStyle: TextStyle(fontWeight: FontWeight.w500, color: secondaryColor),
-          hintText: hint,
-          hintStyle:
-      const TextStyle(fontWeight: FontWeight.normal, color: Colors.grey),
-          alignLabelWithHint: true, 
-          border: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(50),
-    borderSide: BorderSide(color: secondaryColor),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        heading(label, Colors.black),
+        sizeBox(5),
+        TextFormField(
+          controller: controller,
+          keyboardType: inputType,
+          decoration: InputDecoration(
+            hintText: hint,
+            border: const OutlineInputBorder(
+              borderRadius: BorderRadius.all(Radius.circular(5)),
+            ),
           ),
-          focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(50),
-      borderSide: BorderSide(color: secondaryColor)),
-          enabledBorder: OutlineInputBorder(
-    borderRadius: BorderRadius.circular(50),
-    borderSide: BorderSide(color: secondaryColor),
-          ),
-          focusColor: secondaryColor,
-          hoverColor: secondaryColor,
-          errorBorder: const OutlineInputBorder(
-    borderSide: BorderSide(width: 1, color: Colors.red),
-          )
-          ),
+          maxLines: null,
+          minLines: 1,
           validator: validator,
-          );
+        ),
+      ],
+    );
   }
 }
 

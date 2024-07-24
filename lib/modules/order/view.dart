@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tams/components/assets.dart';
 import 'package:tams/models/order.dart';
+import 'package:tams/utili/formating.dart';
 import 'package:tams/utili/validations.dart';
 import 'package:tams/widgets/inoutfield.dart';
 

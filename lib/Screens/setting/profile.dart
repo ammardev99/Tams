@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tams/Screens/setting/edit_profile.dart';
 import 'package:tams/Screens/socail_media.dart';
-import 'package:tams/auth/login.dart';
+import 'package:tams/auth/login/view.dart';
 import 'package:tams/components/assets.dart';
 import 'package:tams/components/widgets.dart';
 
@@ -115,7 +115,7 @@ class Profile extends StatelessWidget {
             ),
             onTap: () {
               Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => const Login()));
+                  MaterialPageRoute(builder: (context) => LoginPage()));
             },
           ),
         )

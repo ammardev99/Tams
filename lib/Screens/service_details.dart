@@ -5,6 +5,7 @@ import 'package:tams/models/favorite_controller.dart';
 import 'package:tams/models/order.dart';
 import 'package:tams/models/service.dart';
 import 'package:tams/modules/order/view.dart';
+import 'package:tams/utili/formating.dart';
 
 class ServiceDetails extends StatefulWidget {
   const ServiceDetails({super.key});

@@ -1,6 +1,7 @@
 // import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tams/components/assets.dart';
+import 'package:tams/utili/formating.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});

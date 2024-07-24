@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:tams/Screens/service_details.dart';
 import 'package:tams/components/assets.dart';
 import 'package:tams/models/service.dart';
+import 'package:tams/utili/formating.dart';
 
 myBoxShadow() {
   return const BoxShadow(

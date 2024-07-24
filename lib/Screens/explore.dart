@@ -4,6 +4,7 @@ import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:tams/Screens/courseintro.dart';
 import 'package:tams/components/assets.dart';
 import 'package:tams/components/widgets.dart';
+import 'package:tams/utili/formating.dart';
 
 // import 'package:flutter/ge';
 class Explore extends StatefulWidget {
