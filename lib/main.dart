@@ -1,6 +1,8 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:tams/auth/login/view.dart';
 import 'package:tams/components/assets.dart';
@@ -40,7 +42,18 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: const Login(),
-      home: LoginPage(),
+      // home: LoginPage(),
+            home: AnimatedSplashScreen(
+          duration: 2000,
+          splashTransition: SplashTransition.fadeTransition,
+          centered: true,
+          splash: SvgPicture.asset(
+            'assets/svg/app_logo.svg',
+            semanticsLabel: 'TAHMS',
+            height: 100,
+          ),
+          nextScreen: LoginPage()),
+
     );
   }
 }

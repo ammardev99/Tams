@@ -27,6 +27,7 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
 
   RxBool fetching = false.obs;
   Future<void> _fetchServices() async {
+    fetching.value =true;
     try {
       // Fetch services from API
       List<Service> fetchedServices = await ApiService().fetchServices();
@@ -38,6 +39,8 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
       print('Error fetching services: $e');
       // Handle error as needed
     }
+        fetching.value =false;
+
   }
 
   Future<void> _refreshServices() async {
