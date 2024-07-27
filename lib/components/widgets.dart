@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tams/modules/blogs/blog_details.dart';
 import 'package:tams/models/blog_model.dart';
-import 'package:tams/modules/service_details.dart';
+import 'package:tams/modules/service/service_details.dart';
 import 'package:tams/components/assets.dart';
 import 'package:tams/models/service.dart';
 import 'package:tams/utili/formating.dart';
@@ -179,85 +179,172 @@ Widget showService(Service object, [List<Object>? list]) {
   );
 }
 
-Widget showBlog(Blog blog) {
-  return InkWell(
-    hoverColor: Colors.white,
-    splashColor: secondaryColor03,
-    borderRadius: BorderRadius.circular(8),
-    highlightColor: Colors.white,
-    onTap: () {
-      debugPrint('Open Service Info');
+Widget showBlog(Blog blog, int index) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8),
+    child: InkWell(
+      hoverColor: Colors.white,
+      splashColor: secondaryColor03,
+      borderRadius: BorderRadius.circular(8),
+      highlightColor: Colors.white,
+      onTap: () {
+        debugPrint('Open Service Info');
 
-      Get.to(BlogDetailsScreen(blog: blog),);
-    },
-    child: Stack(children: [
-      Container(
-        padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          border: Border.all(width: 1, color: secondaryColor03),
-          boxShadow: [myBoxShadow()],
+        Get.to(
+          BlogDetailsScreen(blog: blog),
+        );
+      },
+      child: Stack(children: [
+        Container(
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.9),
+            borderRadius: BorderRadius.circular(5),
+            border: Border.all(width: 1, color: secondaryColor03),
+            boxShadow: [myBoxShadow()],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Thumbnail
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  heading(blog.title, secondaryColor),
+                ],
+              ),
+              sizeBox(10),
+              index % 2 == 0
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          // width: 150,
+                          height: 150,
+                          child: Image.memory(
+                            blog.image,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Flexible(
+                          flex: 1,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              RichText(
+                                textAlign: TextAlign.justify,
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: blog.author,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                constraints: const BoxConstraints(
+                                    maxHeight:
+                                        150), // Adjust maxHeight as needed
+                                child: Text(
+                                  blog.memory,
+                                  style: const TextStyle(
+                                      fontSize: 12, color: Colors.grey),
+                                  textAlign: TextAlign.justify,
+                                  softWrap: true,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 8,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          flex: 1,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              RichText(
+                                textAlign: TextAlign.justify,
+                                text: TextSpan(
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: blog.author,
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                constraints: const BoxConstraints(
+                                    maxHeight:
+                                        150), // Adjust maxHeight as needed
+                                child: Text(
+                                  blog.memory,
+                                  style: const TextStyle(
+                                      fontSize: 12, color: Colors.grey),
+                                  textAlign: TextAlign.justify,
+                                  softWrap: true,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 8,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // Flexible(
+                        //   child: Text(
+                        //     'by ${blog.author}: ${blog.memory}',
+                        //     style: const TextStyle(
+                        //         fontSize: 12, color: Colors.grey),
+                        //     textAlign: TextAlign.justify,
+                        //     softWrap: true,
+                        //     overflow: TextOverflow.ellipsis,
+                        //     maxLines: 9,
+                        //   ),
+                        // ),
+                        const SizedBox(width: 10),
+                        SizedBox(
+                          // width: 150,
+                          height: 150,
+                          child: Image.memory(
+                            blog.image,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ],
+                    ),
+              sizeBox(5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  icontInfo(Icons.location_on_outlined, blog.location,
+                      secondaryColor),
+                  icontInfo(
+                      Icons.calendar_month_outlined, blog.date, Colors.grey),
+                ],
+              ),
+            ],
+          ),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Thumbnail
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                heading(blog.title, secondaryColor),
-              ],
-            ),
-            sizeBox(10),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: 150,
-                  height: 150,
-                  child: Image.memory(
-                    blog.image,
-                    fit: BoxFit.contain,
-                  ),
-                ),
-                const SizedBox(width: 3),
-                Flexible(
-                  child: Text(
-                    blog.memory,
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
-                    textAlign: TextAlign.justify,
-                    softWrap: true,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 8,
-                  ),
-                ),
-              ],
-            ),
-            sizeBox(5),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                icontInfo(
-                    Icons.location_on_outlined, blog.location, secondaryColor),
-                icontInfo(
-                    Icons.calendar_month_outlined, blog.date, Colors.grey),
-              ],
-            ),
-          ],
-        ),
-      ),
-      // Positioned(
-      //     right: 0,
-      //     child: IconButton(
-      //         onPressed: () {},
-      //         icon: const Icon(
-      //           Icons.favorite_border_rounded,
-      //           color: Colors.grey,
-      //         ))
-      //         )
-    ]),
+      ]),
+    ),
   );
 }
 

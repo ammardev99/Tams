@@ -1,5 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:tams/components/assets.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -150,6 +151,28 @@ Widget menuOptionLink(
             },
           );
         }
+      },
+    ),
+  );
+}
+Widget menuOptionPage(
+    BuildContext context, IconData icon, String txt, page, ) {
+  return Container(
+    decoration: BoxDecoration(
+      border: Border(bottom: BorderSide(color: secondaryColor)),
+    ),
+    child: ListTile(
+      hoverColor: secondaryColor03,
+      splashColor: secondaryColor03,
+      leading: Icon(icon),
+      iconColor: secondaryColor,
+      title: subHeading(txt, Colors.grey),
+      trailing: Icon(
+        Icons.chevron_right,
+        color: secondaryColor03,
+      ),
+      onTap: () {
+        Get.to(page);
       },
     ),
   );

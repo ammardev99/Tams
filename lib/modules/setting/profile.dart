@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tams/modules/auth/login/view.dart';
 import 'package:tams/components/assets.dart';
+import 'package:tams/modules/blogs/add_blog.dart';
 import 'package:tams/widgets/buttons.dart';
 
 class Profile extends StatelessWidget {
@@ -64,6 +65,9 @@ class Profile extends StatelessWidget {
                 ),
               ),
             )),
+        // Get.to(const AddBlogScreen());
+        menuOptionPage(context, Icons.add_to_photos_outlined, 'Add New Blog',
+             const AddBlogScreen()),
         menuOptionLink(
             context,
             Icons.queue_play_next_outlined,

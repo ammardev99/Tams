@@ -2,8 +2,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:tams/modules/blogs/blog_ui.dart';
 import 'package:tams/modules/favorite_list_screen.dart';
-import 'package:tams/tams_services.dart';
-import 'profile.dart';
+import 'package:tams/modules/service/tams_services.dart';
+import 'setting/profile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

@@ -11,53 +11,55 @@ class BlogDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(
-          color: whiteColor,
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          leading: BackButton(
+            color: whiteColor,
+          ),
+          backgroundColor: secondaryColor,
         ),
-        backgroundColor: secondaryColor,
-      ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Image.memory(
-                blog.image,
-                fit: BoxFit.contain,
-              ),
-              const SizedBox(height: 16.0),
-              heading1(blog.title, secondaryColor),
-              const SizedBox(height: 8.0),
-              Text(
-                'Location: ${blog.location}',
-                style: const TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.grey,
+        body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          physics: const AlwaysScrollableScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.memory(
+                  blog.image,
+                  fit: BoxFit.contain,
                 ),
-              ),
-              const SizedBox(height: 8.0),
-              Text(
-                'Date: ${blog.date}',
-                style: const TextStyle(
-                  fontSize: 16.0,
-                  color: Colors.grey,
+                const SizedBox(height: 16.0),
+                heading1(blog.title, secondaryColor),
+                const SizedBox(height: 8.0),
+                Text(
+                  'Location: ${blog.location}',
+                  style: const TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.grey,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16.0),
-              Text(
-                blog.memory,
-                style: const TextStyle(
-                  fontSize: 16.0,
+                const SizedBox(height: 8.0),
+                Text(
+                  'Date: ${blog.date}',
+                  style: const TextStyle(
+                    fontSize: 16.0,
+                    color: Colors.grey,
+                  ),
                 ),
-                textAlign: TextAlign.justify,
-              ),
-              sizeBox(40),
-            ],
+                const SizedBox(height: 16.0),
+                Text(
+                  blog.memory,
+                  style: const TextStyle(
+                    fontSize: 16.0,
+                  ),
+                  textAlign: TextAlign.justify,
+                ),
+                sizeBox(40),
+              ],
+            ),
           ),
         ),
       ),

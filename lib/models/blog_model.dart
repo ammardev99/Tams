@@ -1,4 +1,3 @@
-// lib/models/blog.dart
 import 'dart:typed_data';
 
 class Blog {
@@ -30,5 +29,16 @@ class Blog {
       author: json['author'],
       image: Uint8List.fromList(List<int>.from(json['image']['data'])),
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'title': title,
+      'location': location,
+      'memory': memory,
+      'date': date,
+      'author': author,
+      'image': {'data': image.toList()},
+    };
   }
 }
