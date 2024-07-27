@@ -1,9 +1,9 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:tams/Screens/favorite_list_screen.dart';
+import 'package:tams/modules/blogs/blog_ui.dart';
+import 'package:tams/modules/favorite_list_screen.dart';
 import 'package:tams/tams_services.dart';
-import 'notes.dart';
-import '../modules/profile.dart';
+import 'profile.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -19,7 +19,8 @@ class _HomePageState extends State<HomePage> {
     const ServiceListScreen(),
     // const Learning(),
     const FavoriteListScreen(),
-    const Cart(),
+    // const Cart(),
+    const BlogsScreen(),
     const Profile(),
     // Learning(),
   ];

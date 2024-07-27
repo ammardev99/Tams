@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tams/Screens/home.dart';
-import 'package:tams/auth/login/state.dart';
+import 'package:tams/modules/home.dart';
+import 'package:tams/modules/auth/login/state.dart';
 import 'package:tams/components/assets.dart';
 
 class LoginLogic extends GetxController {

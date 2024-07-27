@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tams/auth/login/view.dart';
+import 'package:tams/modules/auth/login/view.dart';
 import 'package:tams/components/assets.dart';
 
 import 'state.dart';

@@ -132,10 +132,6 @@ class _ServiceListScreenState extends State<ServiceListScreen> {
                 ),
               ),
             ),
-            // const SliverToBoxAdapter(
-            //   child: SizedBox(height: 30),
-            // ),
-
             SliverToBoxAdapter(
               child: Padding(
                 padding: const EdgeInsets.all(15),

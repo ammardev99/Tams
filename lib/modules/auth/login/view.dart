@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tams/auth/signup/view.dart';
 import 'package:tams/components/assets.dart';
+import 'package:tams/modules/auth/signup/view.dart';
 import 'package:tams/utili/formating.dart';
 import 'package:tams/utili/validations.dart';
 import 'package:tams/utili/validators.dart';

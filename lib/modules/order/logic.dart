@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:tams/Screens/home.dart';
+import 'package:tams/modules/home.dart';
 import 'package:tams/models/order.dart';
 import 'package:tams/models/service.dart';
 import 'package:http/http.dart' as http;

@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:tams/auth/login/view.dart';
 import 'package:tams/components/assets.dart';
 import 'package:tams/firebase_options.dart';
+import 'package:tams/modules/auth/login/view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +20,7 @@ void main() async {
     debugPrint('Firebase initialization failed: $e');
   }
 
-  SystemChrome.setSystemUIOverlayStyle( SystemUiOverlayStyle(
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: secondaryColor,
     statusBarBrightness: Brightness.light,
   ));
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       ),
       // home: const Login(),
       // home: LoginPage(),
-            home: AnimatedSplashScreen(
+      home: AnimatedSplashScreen(
           duration: 2000,
           splashTransition: SplashTransition.fadeTransition,
           centered: true,
@@ -53,7 +53,6 @@ class MyApp extends StatelessWidget {
             height: 100,
           ),
           nextScreen: LoginPage()),
-
     );
   }
 }
